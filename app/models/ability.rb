@@ -9,12 +9,12 @@ class Ability
     end
 
     if user.role? :moderator
-      can :manage, Forum, :moderator => user.id
+      can :manage, Board, :moderator_id => user.id
       end
     end
 
     if user.role? :author
-      can :manage, Post, :author => user.id
+      can :manage, Comment, :author_id => user.id
       end
     end
     
