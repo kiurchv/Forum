@@ -1,0 +1,7 @@
+/.bundle
+/tmp
+/db/*.sqlite3
+/log/*.log
+/vendor/ruby
+forum.sublime-workspace
+forum.sublime-project
