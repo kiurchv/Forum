@@ -7,6 +7,15 @@ gem 'rails', '3.2.8'
 
 gem 'sqlite3'
 
+gem 'devise'
+gem 'cancan'
+
+gem 'haml-rails'
+
+group :development do
+  gem 'hpricot'
+  gem 'ruby_parser'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
