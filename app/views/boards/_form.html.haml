@@ -1,0 +1,19 @@
+= form_for @board do |f|
+  - if @board.errors.any?
+    #error_explanation.alert.alert-error.alert-block
+      %a.close(data-dismiss="alert" href="#")
+        &times;
+      %h4= "#{pluralize(@board.errors.count, "error")} prohibited this board from being saved:"
+      %ul
+        - @board.errors.full_messages.each do |msg|
+          %li= msg
+  = f.label :name
+  = f.text_field :name, :class => 'span5'
+  = f.label :description
+  = f.text_area :description, :class => 'span5'
+  
+  = f.label :moderator_id, "Moderator"
+  = f.collection_select(:moderator_id, User.where(:role => ["admin", "moderator"]), :id, :name)
+  
+  .actions
+    = f.submit 'Save', :class => 'btn btn-primary'

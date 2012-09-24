@@ -4,20 +4,16 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
     
-    if user.role? :admin
+    case user.role
+    when "admin"
       can :manage, :all
-    end
-
-    if user.role? :moderator
+    when "moderator"
       can :manage, Board, :moderator_id => user.id
-      end
+      cannot :destroy, Board
+    when "author"
+      can :manage, [Topic, Comment], :author_id => user.id
+    else
+      can :read, :all
     end
-
-    if user.role? :author
-      can :manage, Comment, :author_id => user.id
-      end
-    end
-    
-    can :read, :all
   end
 end

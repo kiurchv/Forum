@@ -11,3 +11,48 @@
  *= require_self
  *= require_tree .
  */
+
+@import "bootstrap";
+
+.container-fluid {
+  padding: 20px;
+  .row-fluid {
+    header {
+      .pull-left {
+        max-width: 80%;
+      }
+    }
+
+    .table {
+      th.title {
+        width: 40%;
+      }
+
+      th.replies {
+        width: 10%;
+      }
+
+      th.latest {
+        width: 30%;
+      }
+
+      td.actions {
+        width: 20%;
+      }
+
+      td.info {
+        width: 20%;
+      }
+    }
+
+    .btn.new {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .empty {
+      margin: 10px 0;
+      text-align: center;
+    }
+  }
+}

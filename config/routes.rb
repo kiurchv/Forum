@@ -1,6 +1,14 @@
 Forum::Application.routes.draw do
   devise_for :users
 
+  root :to => "boards#index"
+
+  resources :boards do 
+    resources :topics do
+      resources :comments
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

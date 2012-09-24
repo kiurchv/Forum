@@ -1,0 +1,7 @@
+%h1 Editing comment
+
+= render 'form'
+
+= link_to 'Show', board_topic_comment_path(:board_id => @topic.board, :topic_id => @topic, :id => @comment)
+\|
+= link_to 'Back', board_topic_path(:board_id => @topic.board, :id => @topic)

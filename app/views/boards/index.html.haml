@@ -1,0 +1,31 @@
+%h1 Forum boards
+- if !@boards.empty?
+  %table.table.table-hover
+    %tbody
+      - @boards.each do |board|
+        %tr
+          %td.board
+            %h4= link_to board.name, board
+            %p
+              / TODO: Here must be link to moderator page.
+              %small= "#{board.topics.count} topics | Moderator: #{user_name(board.moderator_id)}"
+            %p
+              %i= board.description
+          %td.actions
+            .btn-group
+              - if can? :edit, board
+                = link_to(edit_board_path(board), :class => 'btn btn-large') do
+                  %i.icon-edit 
+                  Edit
+              - if can? :destroy, board
+                / TODO: Create modal for confirm delete
+                = link_to board, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-large btn-danger' do
+                  %i.icon-white.icon-trash
+                  Destroy
+- else
+  .well.empty
+    Has not created any boards yet.
+- if can? :create, Board
+  = link_to new_board_path, :class => 'btn btn-large btn-inverse new' do
+    %i.icon-white.icon-pencil
+    New Board

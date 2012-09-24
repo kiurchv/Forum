@@ -1,0 +1,16 @@
+= form_for [@board, @topic] do |f|
+  - if @topic.errors.any?
+    #error_explanation.alert.alert-error.alert-block
+      %a.close(data-dismiss="alert" href="#")
+        &times;
+      %h4= "#{pluralize(@topic.errors.count, "error")} prohibited this topic from being saved:"
+      %ul
+        - @topic.errors.full_messages.each do |msg|
+          %li= msg
+  = f.label :name
+  = f.text_field :name, :class => 'span5'
+  = fields_for @comment do |cf|
+    = cf.label :content
+    = cf.text_area :content, :rows => "10", :class => 'span5'
+  .actions
+    = f.submit 'Save', :class => 'btn btn-primary'

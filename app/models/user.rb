@@ -29,10 +29,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :name
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :role
   # attr_accessible :title, :body
-
-  def role?(base_role)
-    ROLES.index(base_role.to_s) <= ROLES.index(role)
-  end
 end

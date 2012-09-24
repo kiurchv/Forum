@@ -1,0 +1,53 @@
+%header.clearfix
+  .pull-left
+    %h1= @board.name
+    %p
+      %i= @board.description
+    %p
+      / TODO: Here must be link to moderator page.
+      %small= "Moderator: #{user_name(@board.moderator_id)}"
+  .pull-right
+    = link_to boards_path, :class => 'btn btn-large' do
+      %i.icon-arrow-left
+      Back
+    - if can? :edit, @board
+      = link_to edit_board_path(@board), :class => 'btn btn-large' do
+        %i.icon-edit
+        Edit
+- if !@board.topics.empty?
+  %table.table.table-hover
+    %thead
+      %tr
+        %th.title
+          Topic title
+        %th.replies
+          Comments
+        %th.latest
+          Latest comment
+    %tbody
+      - for topic in @board.topics
+        %tr
+          %td= link_to topic.name, board_topic_path(:board_id => @board, :id => topic)
+          %td= topic.comments.count - 1
+          %td= "#{topic.comments.last.created_at} by #{user_name(topic.comments.last.author_id)}" unless topic.comments.count < 2 
+          %td.actions
+            .btn-group
+              - if can? :edit, topic
+                = link_to edit_board_topic_path(:board_id => @board, :id => topic),
+                  :class => 'btn btn-small' do
+                  %i.icon-edit
+                  Edit
+              - if can? :destroy, topic
+                / TODO: Create modal for confirm delete
+                = link_to board_topic_path(:board_id => @board, :id => topic),
+                  :method => :delete, data: { confirm: 'Are you sure?' },
+                  :class => 'btn btn-small btn-danger' do
+                  %i.icon-white.icon-trash
+                  Destroy
+- else
+  .well.empty
+    Has not created any topics yet.
+- if can? :create, Topic
+  = link_to new_board_topic_url(@board), :class => 'btn btn-large btn-primary new' do
+    %i.icon-white.icon-pencil
+    New topic

@@ -1,0 +1,7 @@
+%h1 Editing topic
+
+= render 'form'
+
+= link_to 'Show', board_topic_path(:board_id => @board, :id => @topic)
+\|
+= link_to 'Back', board_path(@board)
