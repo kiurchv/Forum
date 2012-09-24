@@ -8,8 +8,8 @@
   %body
     .container-fluid
       .row-fluid
-        .span2
-          
+        %aside.span2
+          = render 'shared/user' 
         .span10
           -if flash[:alert]
             .alert.alert-error

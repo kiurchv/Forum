@@ -12,6 +12,8 @@ gem 'cancan'
 
 gem 'haml-rails'
 
+gem 'gravatar_image_tag'
+
 group :development do
   gem 'hpricot'
   gem 'ruby_parser'

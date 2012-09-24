@@ -1,0 +1,11 @@
+- if user_signed_in?
+  .clearfix
+    = gravatar_image_tag current_user.email, :alt => current_user.name,
+      :class => 'userpic img-rounded pull-left',
+      :gravatar => { :default => :identicon, :size => 70 }
+    %h3= current_user.name
+  %p
+    %i.icon.icon-user
+    = current_user.role.capitalize
+- else
+  = render 'devise/shared/links'

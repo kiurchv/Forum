@@ -17,6 +17,12 @@
 .container-fluid {
   padding: 20px;
   .row-fluid {
+    aside {
+      img.userpic {
+        margin: 15px 3px 10px 0;
+      }
+    }
+
     header {
       .pull-left {
         max-width: 80%;
