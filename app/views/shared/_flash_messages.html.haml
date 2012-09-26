@@ -1,0 +1,8 @@
+- flash.each do |key, msg|
+  - if msg
+    - type = 'error' if key == :alert 
+    - type = 'success' if key == :notice
+    %div{ :class => "alert alert-#{type}" }
+      %a.close(data-dismiss="alert" href="#")
+        &times;
+      = msg
