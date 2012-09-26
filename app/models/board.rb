@@ -11,9 +11,11 @@
 #
 
 class Board < ActiveRecord::Base
-  attr_accessible :description, :moderator_id, :name
+  attr_accessible :name, :description, :moderator_id
   
   has_many :topics, :dependent => :destroy
 
-  validates_presence_of :name
+  validates :name, :moderator_id, :presence => true
+  validates :name, :length => { :maximum => 50 }
+  validates :description, :length => { :maximum => 300 }
 end

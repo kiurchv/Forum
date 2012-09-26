@@ -22,10 +22,11 @@
 class User < ActiveRecord::Base
   ROLES = %w[admin moderator author banned]
 
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :role
+  attr_accessible :name, :role, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
   validates :name, :presence => true
+  validates :role, :inclusion => { :in => ROLES }, :on => :update
 
   before_create :set_role
 

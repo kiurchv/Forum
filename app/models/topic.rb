@@ -16,5 +16,7 @@ class Topic < ActiveRecord::Base
   belongs_to :board  
   has_many :comments, :dependent => :destroy
 
-  validates_presence_of :name
+  validates :name, :author_id, :presence => true
+  validates :name, :length => { :maximum => 50 }
+  validates_associated :board
 end

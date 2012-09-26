@@ -15,5 +15,6 @@ class Comment < ActiveRecord::Base
 
   belongs_to :topic
 
-  validates_presence_of :content
+  validates :content, :presence => true
+  validates_associated :topic
 end
