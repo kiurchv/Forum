@@ -67,6 +67,7 @@ class CommentsController < ApplicationController
   # PUT /boards/:board_id/topics/:topic_id/comments/1.json
   def update
     @comment = Comment.find(params[:id])
+    @topic   = @comment.topic
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
