@@ -11,9 +11,10 @@ class Ability
       can :manage, Board, :moderator_id => user.id
       cannot :destroy, Board
     when "author"
+      can :create, [Topic, Comment]
       can :manage, [Topic, Comment], :author_id => user.id
-    else
-      can :read, :all
     end
+    
+    can :read, :all
   end
 end

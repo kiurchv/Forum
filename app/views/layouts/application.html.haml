@@ -8,17 +8,8 @@
   %body
     .container-fluid
       .row-fluid
-        %aside.span2
-          = render 'shared/user' 
-        .span10
-          -if flash[:alert]
-            .alert.alert-error
-              = flash[:alert]
-              %a.close(data-dismiss="alert" href="#")
-                &times;
-          -if flash[:notice]
-            .alert.alert-success
-              = flash[:notice]
-              %a.close(data-dismiss="alert" href="#")
-                &times;
+        %aside.span3
+          = render 'shared/sidebar' 
+        .span9
+          = render 'shared/flash'
           = yield

@@ -14,12 +14,35 @@
 
 @import "bootstrap";
 
+form .field_with_errors {
+  @include formFieldState($errorText, $errorText, $errorBackground);
+}
+
 .container-fluid {
   padding: 20px;
   .row-fluid {
     aside {
-      img.userpic {
-        margin: 15px 3px 10px 0;
+      .well {
+        padding: 8px 0;
+      }
+      .nav > .user-header {
+        img.userpic {
+          margin: 8px 0;
+        }
+        
+        h3 {
+          color: #000;
+          line-height: 34px;
+          margin-left: 80px;
+          text-transform: none;
+        }
+        
+        & > a {
+          display: inline-block;
+          &:hover {
+            background: transparent;
+          }
+        }
       }
     }
 

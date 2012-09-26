@@ -1,17 +1,25 @@
-%h2 Sign up
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email
-  %div
-    = f.label :password
-    %br/
-    = f.password_field :password
-  %div
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-  %div= f.submit "Sign up"
-= render "devise/shared/links"
+= form_for resource, :as => resource_name, :url => registration_path(resource_name),
+  :html => { :class => 'form-horizontal' } do |f|
+  %legend
+    %h2 Sign up
+  - if devise_error_messages
+    .alert.alert-block.alert-error
+      %a.close(data-dismiss="alert" href="#")
+        &times;
+      = devise_error_messages
+  .control-group
+    = f.label :name, :class => 'control-label'
+    .controls= f.text_field :name, :placeholder => "Your name"
+  .control-group
+    = f.label :email, :class => 'control-label'
+    .controls= f.email_field :email, :placeholder => 'Email'
+  .control-group
+    = f.label :password, :class => 'control-label'
+    .controls= f.password_field :password, :placeholder => 'Password'
+  .control-group
+    = f.label :password_confirmation, "Confirmation", :class => 'control-label'
+    .controls
+      = f.password_field :password_confirmation,
+        :placeholder => 'Password confirmation'
+  .control-group
+    .controls= f.submit "Sign up", :class => 'btn btn-primary'
