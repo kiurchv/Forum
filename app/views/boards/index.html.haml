@@ -9,8 +9,7 @@
             %p
               / TODO: Here must be link to moderator page.
               %small= "#{board.topics.count} topics | Moderator: #{user_name(board.moderator_id)}"
-            %p
-              %i= board.description
+            %p= board.description
           %td.actions
             .btn-group
               - if can? :edit, board
@@ -19,7 +18,8 @@
                   Edit
               - if can? :destroy, board
                 / TODO: Create modal for confirm delete
-                = link_to board, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-large btn-danger' do
+                = link_to board, :method => :delete, data: { confirm: 'Are you sure?' },
+                  :class => 'btn btn-large btn-danger' do
                   %i.icon-white.icon-trash
                   Destroy
 - else

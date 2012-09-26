@@ -1,6 +1,6 @@
 = form_for [@topic.board, @topic, @comment] do |f|
   - if @comment.errors.any?
-    #error_explanation.alert.alert-error.alert-block
+    .alert.alert-block.alert-error
       %a.close(data-dismiss="alert" href="#")
         &times;
       %h4= "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
@@ -8,6 +8,7 @@
         - @comment.errors.full_messages.each do |msg|
           %li= msg
   = f.label :content
-  = f.text_area :content, :rows => "10", :class => 'span5'
+  = f.text_area :content, :rows => "10", :class => 'span5', :placeholder => "Comment text"
   .actions
     = f.submit 'Save', :class => 'btn btn-primary'
+    = link_to 'Back', :back, :class => 'btn'

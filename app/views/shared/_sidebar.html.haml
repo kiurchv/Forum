@@ -23,8 +23,7 @@
           Sign Out
     - else
       %li
-        %h3
-          Welcome!
+        %h3 Welcome!
       - if controller_name != 'sessions'
         %li
           = link_to new_session_path(resource_name) do

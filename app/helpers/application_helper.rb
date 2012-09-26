@@ -51,7 +51,7 @@ module ApplicationHelper
 
     html = <<-HTML
     <div id="error_explanation">
-      <p>#{sentence}</p>
+      <h4>#{sentence}</h4>
       <ul>#{messages}</ul>
     </div>
     HTML
