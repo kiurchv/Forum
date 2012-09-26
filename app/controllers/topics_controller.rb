@@ -17,6 +17,7 @@ class TopicsController < ApplicationController
   # GET /boards/:board_id/topics/1.json
   def show
     @topic = Topic.find(params[:id])
+    @title = @topic.name
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,6 +41,7 @@ class TopicsController < ApplicationController
   # GET /boards/:board_id/topics/1/edit
   def edit
     @topic   = Topic.find(params[:id])
+    @title   = @topic.name
     @board   = @topic.board
     @comment = @topic.comments.first
   end

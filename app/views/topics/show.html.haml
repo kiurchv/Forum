@@ -1,8 +1,4 @@
 %header.clearfix
-  .pull-left
-    %h2= @topic.name
-    %p
-      %i= "on #{board_name(@topic.board_id)}"
   .pull-right
     = link_to board_path(@topic.board), :class => 'btn btn-large' do
       %i.icon-arrow-left
@@ -12,6 +8,10 @@
         :class => 'btn btn-large' do
         %i.icon-edit
         Edit
+  .page-header
+    %h1
+      = @topic.name
+      %small= "on #{board_name(@topic.board_id)}"
 %table.table.table-bordered.table-hover
   %tbody
     - for comment in @topic.comments
@@ -26,7 +26,6 @@
               %i.icon.icon-calendar
               = comment.created_at
         %td.content
-          = comment.content
           .actions.btn-group.pull-right
             - if can? :edit, comment
               = link_to edit_board_topic_comment_path(:board_id => comment.topic.board, :topic_id => comment.topic, :id => comment),
@@ -39,6 +38,7 @@
                 :class => 'btn btn-danger' do
                 %i.icon-white.icon-trash
                 Destroy
+          = comment.content
 - if can? :create, Comment
   = link_to new_board_topic_comment_url(:board_id => @topic.board, :topic_id => @topic),
     :class => 'btn btn-large new' do

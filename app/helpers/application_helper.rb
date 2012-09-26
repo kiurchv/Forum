@@ -15,6 +15,20 @@ module ApplicationHelper
     end
   end
 
+  def title
+    if current_page?(root_url) or current_page?(boards_url)
+      app_name
+    else
+      @title = controller_name.humanize.singularize if @title.nil?
+      action = "#{action_name.humanize} " unless %w[show index].include?(action_name)
+      "#{app_name} | #{action}#{@title}"
+    end
+  end
+
+  def app_name
+    Rails.application.class.to_s.split("::").first
+  end
+
   def resource_name
     :user
   end

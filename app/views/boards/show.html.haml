@@ -1,11 +1,4 @@
 %header.clearfix
-  .pull-left
-    %h1= @board.name
-    %p
-      %i= @board.description
-    %p
-      / TODO: Here must be link to moderator page.
-      %small= "Moderator: #{user_name(@board.moderator_id)}"
   .pull-right
     = link_to boards_path, :class => 'btn btn-large' do
       %i.icon-arrow-left
@@ -14,6 +7,12 @@
       = link_to edit_board_path(@board), :class => 'btn btn-large' do
         %i.icon-edit
         Edit
+  .page-header
+    %h2
+      = @board.name
+      %small= @board.description
+    / TODO: Here must be link to moderator page.
+    %small= "Moderator: #{user_name(@board.moderator_id)}"
 - if !@board.topics.empty?
   %table.table.table-hover
     %thead

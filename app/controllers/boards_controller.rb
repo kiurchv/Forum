@@ -16,6 +16,7 @@ class BoardsController < ApplicationController
   # GET /boards/1.json
   def show
     @board = Board.find(params[:id])
+    @title = @board.name
 
     respond_to do |format|
       format.html # show.html.haml
@@ -37,6 +38,7 @@ class BoardsController < ApplicationController
   # GET /boards/1/edit
   def edit
     @board = Board.find(params[:id])
+    @title = @board.name
   end
 
   # POST /boards
