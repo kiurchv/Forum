@@ -18,4 +18,8 @@ class Board < ActiveRecord::Base
   validates :name, :moderator_id, :presence => true
   validates :name, :length => { :maximum => 50 }
   validates :description, :length => { :maximum => 300 }
+
+  # def to_param
+  #   name.parametrize
+  # end
 end

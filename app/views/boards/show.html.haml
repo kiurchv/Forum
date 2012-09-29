@@ -28,7 +28,7 @@
         %tr
           %td= link_to topic.name, board_topic_path(:board_id => @board, :id => topic)
           %td= topic.comments.count - 1
-          %td= "#{topic.comments.last.created_at} by #{user_name(topic.comments.last.author_id)}" unless topic.comments.count < 2 
+          %td= "#{topic.comments.last.created_at.to_s(:short)} by #{topic.comments.last.user.name}" unless topic.comments.count < 2 
           %td.actions
             .btn-group
               - if can? :edit, topic

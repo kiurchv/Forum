@@ -54,7 +54,7 @@ class TopicsController < ApplicationController
     @comment = @topic.comments.build(params[:comment])
 
     @topic.board_id  = @board.id
-    @topic.author_id = @comment.author_id = current_user.id
+    @topic.user_id = @comment.user_id = current_user.id
 
     respond_to do |format|
       if @topic.save

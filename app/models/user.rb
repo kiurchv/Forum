@@ -20,7 +20,7 @@
 #
 
 class User < ActiveRecord::Base
-  ROLES = %w[admin moderator author banned]
+  ROLES = %w[admin moderator author readonly]
 
   attr_accessible :name, :role, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
@@ -34,6 +34,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
+
+  has_many :topics, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
+
+  def role?(base_role)
+    ROLES.index(base_role.to_s) >= ROLES.index(role)
+  end
 
   private
 

@@ -11,20 +11,20 @@
   .page-header
     %h1
       = @topic.name
-      %small= "on #{board_name(@topic.board_id)}"
+      %small= "on #{@topic.board.name}"
 %table.table.table-bordered.table-hover
   %tbody
     - for comment in @topic.comments
       %tr{ :id => "comment_#{comment.id}" }
         %td.info
-          %h4= user_name(comment.author_id)
+          %h4= comment.user.name
           %small
             %p
               %i.icon.icon-user
-              = user_role(comment.author_id).capitalize
+              = comment.user.role.humanize
             %p
               %i.icon.icon-calendar
-              = comment.created_at
+              = comment.created_at.to_s(:long)
         %td.content
           .actions.btn-group.pull-right
             - if can? :edit, comment

@@ -1,7 +1,7 @@
 module ApplicationHelper
   def method_missing(meth, *arg)
     if meth.to_s =~ /^(user|board|topic)_(.+)$/
-      eval "#{$1.capitalize}.find(#{arg.first}).#{$2}"
+      eval "#{$1.capitalize}.find_by_id(#{arg.first}).try(:#{$2})"
     else
       super
     end
@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def title
-    if current_page?(root_url) or current_page?(boards_url)
+    if current_page?(boards_url)
       app_name
     else
       @title = controller_name.humanize.singularize if @title.nil?

@@ -1,0 +1,27 @@
+%h1 Users
+%table.table.table-hover
+  - @users.each do |user|
+    %tr
+      %td.userpic
+        =gravatar_image_tag user.email, :alt => user.name,
+         :class => 'img-rounded',
+         :gravatar => { :default => :identicon, :size => 40 }
+      %td
+        %h5= link_to user.name, user_path(user)
+      %td
+        %i.icon.icon-envelope
+        = mail_to user.email
+        %br
+        %i.icon.icon-user
+        = user.role.humanize
+      %td.actions
+        .btn-group
+          - if can? :edit, user
+            = link_to edit_user_path(user), :class => 'btn btn-small' do
+              %i.icon.icon-edit
+              Edit
+          - if can? :destroy, user
+            = link_to user, :method => :delete, :data => { confirm: 'Are you sure?' },
+              :class => 'btn btn-small btn-danger' do
+              %i.icon.icon-white.icon-trash
+              Destroy

@@ -1,0 +1,50 @@
+%header.clearfix
+  - if can? :edit, @user
+    = link_to edit_user_path(@user), :class => 'btn btn-large pull-right' do
+      %i.icon.icon-edit
+      Edit
+  = gravatar_image_tag @user.email, :alt => @user.name,
+    :class => 'img-rounded pull-left',
+    :gravatar => { :default => :identicon, :size => 100 }
+  .user-info.pull-left
+    %h1= @user.name
+    %ul.unstyled
+      %li
+        %i.icon.icon-envelope
+        =mail_to current_user.email
+      %li
+        %i.icon.icon-user
+        = @user.role.capitalize
+      %li
+        %i.icon.icon-time
+        = "Joined on #{@user.created_at.to_s(:short)}"
+.row-fluid
+  %section.span4
+    .page-header
+      %h3 Topics
+    - if !@topics.empty?
+      %ul.unstyled
+        - @topics.each do |topic|
+          %li= link_to topic.name, board_topic_path(:board_id => topic.board, :id => topic)
+    - else
+      User has not made any topics yet.
+  %section.span4
+    .page-header
+      %h3 Comments
+    - if !@comments.empty?
+      %ul.unstyled
+        - @comments.each do |comment|
+          - comment.content = "#{comment.content[0..21].chomp(' ')}..." if comment.content.length > 20 
+          %li= link_to comment.content, board_topic_comment_path(:board_id => comment.topic.board,
+            :topic_id => comment.topic, :id => comment)
+    - else
+      User has not left any comments yet.
+  - if @user.role? :moderator
+    - boards = Board.find_all_by_moderator_id(@user.id)
+    - if !boards.empty?
+      %section.span4
+        .page-header
+          %h3 Moderated boards
+        %ul.unstyled
+          - boards.each do |board|
+            %li= link_to board.name, board_path(board)

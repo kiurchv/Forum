@@ -8,13 +8,15 @@
             %h4= link_to board.name, board
             %p
               / TODO: Here must be link to moderator page.
-              %small= "#{board.topics.count} topics | Moderator: #{user_name(board.moderator_id)}"
+              %small
+                = "#{board.topics.count} topics"
+                = " | Moderator: #{user_name(board.moderator_id)}" if user_name(board.moderator_id)
             %p= board.description
           %td.actions
             .btn-group
               - if can? :edit, board
                 = link_to(edit_board_path(board), :class => 'btn btn-large') do
-                  %i.icon-edit 
+                  %i.icon-edit
                   Edit
               - if can? :destroy, board
                 / TODO: Create modal for confirm delete

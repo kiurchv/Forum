@@ -14,6 +14,15 @@
         = current_user.role.capitalize
       %li.divider
       %li
+        = link_to user_path(current_user) do
+          %i.icon.icon-star
+          View profile
+      %li
+        = link_to users_path do
+          %i.icon.icon-list
+          All users
+      %li.divider
+      %li
         = link_to edit_user_registration_path do
           %i.icon.icon-cog
           Edit Profile

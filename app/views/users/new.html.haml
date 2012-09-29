@@ -1,5 +1,4 @@
-= form_for resource, :as => resource_name, :url => registration_path(resource_name),
-  :html => { :class => 'form-horizontal' } do |f|
+= form_for @user, :html => { :class => 'form-horizontal' } do |f|
   %legend
     %h2 Sign up
   - if devise_error_messages
@@ -12,14 +11,14 @@
     .controls= f.text_field :name, :placeholder => "Your name"
   .control-group
     = f.label :email, :class => 'control-label'
-    .controls= f.email_field :email, :placeholder => 'Email'
+    .controls= f.email_field :email, :placeholder => "Email"
   .control-group
     = f.label :password, :class => 'control-label'
-    .controls= f.password_field :password, :placeholder => 'Password'
+    .controls= f.password_field :password, :placeholder => "Password"
   .control-group
     = f.label :password_confirmation, "Confirmation", :class => 'control-label'
     .controls
       = f.password_field :password_confirmation,
-        :placeholder => 'Password confirmation'
+        :placeholder => "Password confirmation"
   .control-group
     .controls= f.submit "Sign up", :class => 'btn btn-primary'

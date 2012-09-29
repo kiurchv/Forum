@@ -1,10 +1,16 @@
 Forum::Application.routes.draw do
-  devise_for :users
+  devise_for :user, :skip => :sessions, :controllers => { :registrations => :users } do
+    resources :users, :except => :new
 
-  root :to => "boards#index"
+    get    'sign_in'      => 'devise/sessions#new',     :as => :new_user_session
+    post   'sign_in'      => 'devise/sessions#create',  :as => :user_session
+    match  'sign_out'     => 'devise/sessions#destroy', :as => :destroy_user_session,
+      :via => Devise.mappings[:user].sign_out_via
+  end
 
-  resources :boards do 
-    resources :topics do
+  
+  resources :boards, :path => '' do
+    resources :topics, :param => ':topic_name' do
       resources :comments
     end
   end

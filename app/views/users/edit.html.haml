@@ -1,7 +1,6 @@
-= form_for resource, :as => resource_name, :url => registration_path(resource_name),
-  :html => { :class => 'form-horizontal', :method => :put } do |f|
+= form_for @user, :html => { :class => 'form-horizontal' } do |f|
   %legend
-    %h2= "Edit #{resource_name.to_s.humanize}"
+    %h2= "Edit user"
   - if devise_error_messages
     .alert.alert-block.alert-error
       %a.close(data-dismiss="alert" href="#")
@@ -10,12 +9,12 @@
   .control-group
     = f.label :name, :class => 'control-label'
     .controls= f.text_field :name, :placeholder => "Your name"
-  - if can? :edit, User
+  - if can? :assign_roles, @user
     .control-group
       = f.label :role, :class => 'control-label'
       .controls
         - roles_array = User::ROLES.map { |r| [r.capitalize, r] }
-        = f.select :role, options_for_select(roles_array, resource.role)
+        = f.select :role, options_for_select(roles_array, @user.role)
   .control-group
     = f.label :email, :class => 'control-label'
     .controls= f.email_field :email, :placeholder => "Email"
@@ -30,18 +29,20 @@
     .controls
       = f.password_field :password_confirmation,  :autocomplete => "off",
       :placeholder => "Password confirmation"
-  .control-group
-    = f.label :current_password, :class => 'control-label'
-    .controls
-      = f.password_field :current_password, :placeholder => "Current password"
-      %small.help-block We need your current password to confirm your changes
+  - if is_current? @user
+    .control-group
+      = f.label :current_password, :class => 'control-label'
+      .controls
+        = f.password_field :current_password,  :autocomplete => "off",
+          :placeholder => "Current password"
+        %small.help-block We need your current password to confirm your changes
   .control-group
     .controls
       Unhappy?
-      = link_to registration_path(resource_name), :class => 'btn btn-small btn-danger',
+      = link_to user_path(@user), :class => 'btn btn-small btn-danger',
         :data => { :confirm => "Are you sure?" }, :method => :delete do
         %i.icon.icon-white.icon-trash
-        Cancel my account
+        Delete my account
   .control-group
     .controls
       = f.submit "Update", :class => 'btn btn-primary'

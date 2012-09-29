@@ -49,7 +49,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     
     @comment.topic_id  = @topic.id
-    @comment.author_id = current_user.id
+    @comment.user_id = current_user.id
 
     respond_to do |format|
       if @comment.save
