@@ -1,4 +1,4 @@
 Forum
 =====
 
-Simple foum built on Rails.
+Simple forum built on Rails.
